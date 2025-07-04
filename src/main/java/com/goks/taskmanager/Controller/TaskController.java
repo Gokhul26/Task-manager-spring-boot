@@ -5,7 +5,6 @@ import com.goks.taskmanager.Service.TaskService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -19,7 +18,7 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    // POST /tasks
+    // Create a new task
     @PostMapping
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO, Principal principal) {
         String username = principal.getName();
@@ -27,7 +26,7 @@ public class TaskController {
         return ResponseEntity.ok(createdTask);
     }
 
-    // GET /tasks
+    // Get all tasks for the authenticated user
     @GetMapping
     public ResponseEntity<List<TaskDTO>> getTasks(Principal principal) {
         String username = principal.getName();
@@ -35,6 +34,7 @@ public class TaskController {
         return ResponseEntity.ok(tasks);
     }
 
+    // Delete a task by ID for the authenticated user
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id, Principal principal) {
         String username = principal.getName();

@@ -3,48 +3,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors MUST be HSL. */
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
 
 @layer base {
     :root {
-        --background: 0 0% 5%;
-        --foreground: 330 30% 95%;
+        --background: 222 47% 11%;
+        --foreground: 210 40% 98%;
 
-        --card: 0 0% 8%;
-        --card-foreground: 330 30% 95%;
+        --card: 224 36% 14%;
+        --card-foreground: 210 40% 98%;
 
-        --popover: 0 0% 8%;
-        --popover-foreground: 330 30% 95%;
+        --popover: 224 36% 14%;
+        --popover-foreground: 210 40% 98%;
 
-        --primary: 330 70% 45%;
-        --primary-foreground: 0 0% 98%;
+        --primary: 263 70% 50%;
+        --primary-foreground: 210 40% 98%;
 
-        --secondary: 330 20% 15%;
-        --secondary-foreground: 330 30% 85%;
+        --secondary: 215 25% 27%;
+        --secondary-foreground: 210 40% 98%;
 
-        --muted: 0 0% 12%;
-        --muted-foreground: 330 15% 60%;
+        --muted: 215 25% 27%;
+        --muted-foreground: 215 20% 65%;
 
-        --accent: 330 80% 35%;
-        --accent-foreground: 0 0% 98%;
+        --accent: 268 83% 58%;
+        --accent-foreground: 210 40% 98%;
 
-        --destructive: 0 84% 60%;
+        --destructive: 0 63% 31%;
         --destructive-foreground: 210 40% 98%;
 
-        --border: 330 20% 20%;
-        --input: 330 20% 15%;
-        --ring: 330 70% 45%;
+        --border: 215 28% 17%;
+        --input: 215 28% 17%;
+        --ring: 263 70% 50%;
 
-        --radius: 0.75rem;
+        --radius: 0.5rem;
 
-        --sidebar-background: 0 0% 6%;
-        --sidebar-foreground: 330 30% 85%;
-        --sidebar-primary: 330 70% 45%;
-        --sidebar-primary-foreground: 0 0% 98%;
-        --sidebar-accent: 330 20% 12%;
-        --sidebar-accent-foreground: 330 30% 85%;
-        --sidebar-border: 330 20% 18%;
-        --sidebar-ring: 330 70% 45%;
+        --sidebar-background: 222 47% 11%;
+        --sidebar-foreground: 210 40% 98%;
+        --sidebar-primary: 263 70% 50%;
+        --sidebar-primary-foreground: 210 40% 98%;
+        --sidebar-accent: 215 25% 27%;
+        --sidebar-accent-foreground: 210 40% 98%;
+        --sidebar-border: 215 28% 17%;
+        --sidebar-ring: 263 70% 50%;
+    }
+
+    .dark {
+        --background: 222 47% 11%;
+        --foreground: 210 40% 98%;
+        --card: 224 36% 14%;
+        --card-foreground: 210 40% 98%;
+        --popover: 224 36% 14%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 263 70% 50%;
+        --primary-foreground: 210 40% 98%;
+        --secondary: 215 25% 27%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 215 25% 27%;
+        --muted-foreground: 215 20% 65%;
+        --accent: 268 83% 58%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 63% 31%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 215 28% 17%;
+        --input: 215 28% 17%;
+        --ring: 263 70% 50%;
+        --sidebar-background: 222 47% 11%;
+        --sidebar-foreground: 210 40% 98%;
+        --sidebar-primary: 263 70% 50%;
+        --sidebar-primary-foreground: 210 40% 98%;
+        --sidebar-accent: 215 25% 27%;
+        --sidebar-accent-foreground: 210 40% 98%;
+        --sidebar-border: 215 28% 17%;
+        --sidebar-ring: 263 70% 50%;
     }
 }
 
@@ -54,90 +86,58 @@
     }
 
     body {
-        @apply bg-background text-foreground min-h-screen;
-        background: linear-gradient(135deg, hsl(0 0% 5%) 0%, hsl(330 15% 8%) 100%);
+        @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-foreground min-h-screen;
+        background-attachment: fixed;
     }
 }
 
-@layer utilities {
-    /* Enhanced entrance animations */
-    .animate-fade-in {
-        animation: fadeIn 0.8s ease-out forwards;
-        opacity: 0;
+@layer components {
+    .input {
+        @apply w-full px-4 py-3 bg-slate-800/50 backdrop-blur-sm border-2 border-slate-700/50 rounded-xl
+        focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 transition-all duration-300
+        text-slate-200 placeholder-slate-400 shadow-lg hover:shadow-purple-500/10
+        hover:border-slate-600/70;
     }
 
-    .animate-slide-in-from-top {
-        animation: slideInFromTop 0.8s ease-out forwards;
-        opacity: 0;
-        transform: translateY(-30px);
+    .btn {
+        @apply w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600
+        hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl
+        transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25
+        disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
     }
 
-    .animate-slide-in-from-bottom {
-        animation: slideInFromBottom 0.8s ease-out forwards;
-        opacity: 0;
-        transform: translateY(30px);
+    .btn-complete {
+        @apply px-4 py-2 bg-gradient-to-r from-emerald-600 to-green-600
+        hover:from-emerald-700 hover:to-green-700 text-white font-medium rounded-lg
+        transition-all duration-300 transform hover:scale-105 hover:shadow-md hover:shadow-emerald-500/25
+        flex items-center space-x-2;
     }
 
-    .animate-slide-in-from-left {
-        animation: slideInFromLeft 0.8s ease-out forwards;
-        opacity: 0;
-        transform: translateX(-30px);
+    .task-card {
+        @apply bg-slate-800/60 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50
+        shadow-xl hover:shadow-2xl hover:shadow-purple-500/10 hover:border-purple-500/30
+        transition-all duration-300 transform hover:-translate-y-1;
     }
 
-    .animate-slide-in-from-right {
-        animation: slideInFromRight 0.8s ease-out forwards;
-        opacity: 0;
-        transform: translateX(30px);
-    }
-
-    .animate-scale-in {
-        animation: scaleIn 0.6s ease-out forwards;
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    .animate-bounce-in {
-        animation: bounceIn 0.8s ease-out forwards;
-        opacity: 0;
-        transform: scale(0.3);
-    }
-
-    .animate-slide-out-right {
-        animation: slideOutRight 0.5s ease-in forwards;
-    }
-
-    .animate-pulse-slow {
-        animation: pulseSlow 3s ease-in-out infinite;
-    }
-
-    /* Task animations */
-    .task-enter {
-        animation: taskEnter 0.6s ease-out forwards;
-    }
-
-    .task-exit {
-        animation: taskExit 0.4s ease-in forwards;
-    }
-
-    /* Gradient border effect */
-    .gradient-border {
-        background: linear-gradient(135deg, hsl(330 70% 45%) 0%, hsl(330 80% 35%) 100%) padding-box,
-        linear-gradient(135deg, hsl(330 70% 45%) 0%, hsl(330 80% 35%) 100%) border-box;
-        border: 2px solid transparent;
+    .stats-card {
+        @apply bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-2xl p-6
+        border border-slate-700/50 shadow-xl hover:shadow-2xl hover:shadow-purple-500/20
+        transition-all duration-300 transform hover:-translate-y-1 hover:border-purple-500/40;
     }
 }
 
-/* Keyframe definitions */
-@keyframes fadeIn {
+@keyframes fade-in {
     from {
         opacity: 0;
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-@keyframes slideInFromTop {
+@keyframes slide-in-from-top {
     from {
         opacity: 0;
         transform: translateY(-30px);
@@ -148,40 +148,7 @@
     }
 }
 
-@keyframes slideInFromBottom {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInFromLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInFromRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes scaleIn {
+@keyframes scale-in {
     from {
         opacity: 0;
         transform: scale(0.9);
@@ -192,17 +159,16 @@
     }
 }
 
-@keyframes bounceIn {
+@keyframes bounce-in {
     0% {
         opacity: 0;
         transform: scale(0.3);
     }
     50% {
-        opacity: 1;
         transform: scale(1.05);
     }
     70% {
-        transform: scale(0.95);
+        transform: scale(0.9);
     }
     100% {
         opacity: 1;
@@ -210,101 +176,31 @@
     }
 }
 
-@keyframes slideOutRight {
-    from {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-    }
-    to {
-        opacity: 0;
-        transform: translateX(100px) scale(0.8);
-    }
-}
-
-@keyframes taskEnter {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.95);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes taskExit {
-    0% {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(100px) scale(0.8);
-    }
-}
-
-@keyframes pulseSlow {
+@keyframes glow-pulse {
     0%, 100% {
-        opacity: 1;
-        transform: scale(1);
+        box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
     }
     50% {
-        opacity: 0.8;
-        transform: scale(1.02);
+        box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
     }
 }
 
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.8;
-    }
+.animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
 }
 
-/* Enhanced hover effects */
-@layer components {
-    .hover-lift {
-        @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg;
-    }
-
-    .hover-glow {
-        @apply transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/30;
-    }
-
-    .hover-rotate {
-        @apply transition-transform duration-300 hover:rotate-1;
-    }
-
-    .hover-scale {
-        @apply transition-transform duration-300 hover:scale-105;
-    }
+.animate-slide-in-from-top {
+    animation: slide-in-from-top 0.6s ease-out forwards;
 }
 
-/* Utility classes for enhanced animations */
-.animate-wiggle {
-    animation: wiggle 1s ease-in-out infinite;
+.animate-scale-in {
+    animation: scale-in 0.6s ease-out forwards;
 }
 
-@keyframes wiggle {
-    0%, 100% {
-        transform: rotate(-3deg);
-    }
-    50% {
-        transform: rotate(3deg);
-    }
+.animate-bounce-in {
+    animation: bounce-in 0.8s ease-out forwards;
 }
 
-.animate-float {
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
+.animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
 }

@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const AnimeBoy = () => {
+    const [message, setMessage] = useState("Welcome back! 🌟");
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMessage("How you doin'? 😉");
+        }, 4000); // change message after 4 seconds
+
+        return () => clearTimeout(timer); // cleanup
+    }, []);
+
     return (
         <div className="fixed left-4 bottom-4 z-50 animate-bounce-in" style={{ animationDelay: '2s' }}>
             <div className="relative">
@@ -9,7 +19,7 @@ const AnimeBoy = () => {
                     className="absolute -top-16 left-8 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg border-2 border-pink-300/50 animate-fade-in opacity-0"
                     style={{ animationDelay: '3s', animationFillMode: 'forwards' }}
                 >
-                    <p className="text-sm text-gray-800 font-medium whitespace-nowrap">Welcome back! 🌟</p>
+                    <p className="text-sm text-gray-800 font-medium whitespace-nowrap">{message}</p>
                     <div className="absolute -bottom-2 left-6 w-4 h-4 bg-white/90 rotate-45 border-r-2 border-b-2 border-pink-300/50" />
                 </div>
 
@@ -25,7 +35,6 @@ const AnimeBoy = () => {
                         {/* Eyes */}
                         <div className="absolute top-4 left-3 w-3 h-4 bg-gradient-to-b from-blue-400 to-blue-500 rounded-full animate-pulse" />
                         <div className="absolute top-4 right-3 w-3 h-4 bg-gradient-to-b from-blue-400 to-blue-500 rounded-full animate-pulse" />
-
                         {/* Eye shine */}
                         <div className="absolute top-4 left-4 w-1 h-1 bg-white rounded-full" />
                         <div className="absolute top-4 right-4 w-1 h-1 bg-white rounded-full" />
